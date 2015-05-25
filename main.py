@@ -1,12 +1,11 @@
-import sys
-
 __author__ = 'Marek'
+import sys
 from PIL import Image
 from PIL import ImageOps
 import matplotlib.pyplot as plt
 from numpy import sqrt
 
-image = Image.open("image.jpg", mode="r")
+image = Image.open("im.png", mode="r")
 
 
 def histogram():
@@ -40,9 +39,9 @@ def roberts():
     img_data = image.load()
     out_data = out_img.load()
  
-    matrix_x = [(-1, 0, 1), (-2, 0, 2), (-1, 0, 1)]
-    matrix_y = [(-1, -2, -1), (0, 0, 0), (1, 2, 1)]
-    matrix_size = 3
+    matrix_x = [(-1, 0, 1), (-1, 0, 1), (-1, 0, 1)]
+    matrix_y = [(-1, -1, -1), (0, 0, 0), (1, 1, 1)]
+    matrix_size = len(matrix_x)
     matrix_middle = matrix_size/2
  
     rows, cols = image.size
@@ -62,7 +61,7 @@ def roberts():
             out_data[row + matrix_middle, col + matrix_middle] = new_pixel
 
     out_img = ImageOps.invert(out_img)
-    out_img.show()
+    out_img.show('Roberts')
     out_img.save('roberts.png', 'PNG')
 
 
